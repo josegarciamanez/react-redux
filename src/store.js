@@ -1,4 +1,5 @@
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
 
 // constantes de acciones
 const INCREMENT = 'INCREMENT';
@@ -21,7 +22,13 @@ function counter(state = initialState, action) {
 }
 
 // Store
-const store = createStore(counter);
+const store = createStore(
+  counter,
+  composeWithDevTools(
+    applyMiddleware(...middleware)
+    // other store enhancers if any
+  )
+);
 
 store.subscribe(() => {
   console.log(store.getState());
