@@ -1,11 +1,13 @@
 import { createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
-// constantes de acciones
+// Nombres de acciones
 const INCREMENT = 'INCREMENT';
 const DECREMENT = 'DECREMENT';
 
 // Reducer
+// Es una funcion pura que nos regresa el
+// estado actual
 const initialState = 0;
 
 function counter(state = initialState, action) {
@@ -21,41 +23,36 @@ function counter(state = initialState, action) {
   }
 }
 
-// Store
-const store = createStore(
-  counter,
-  composeWithDevTools(
-    applyMiddleware(...middleware)
-    // other store enhancers if any
-  )
-);
-
-store.subscribe(() => {
-  console.log(store.getState());
-});
+// store.subscribe(() => {
+//   console.log(store.getState())
+// })
 
 // Creadores de acciones
-const increment = () => {
+export const increment = () => {
   return {
     type: INCREMENT,
   };
 };
 
-const decrement = () => {
+export const decrement = () => {
   return {
     type: DECREMENT,
   };
 };
 
 // Acciones
-store.dispatch(increment());
+// store.dispatch(increment())
 
-setTimeout(() => {
-  store.dispatch(decrement());
-}, 2000);
+// setTimeout(() => {
+//   store.dispatch(decrement())
+// }, 2000)
 
 // store.getState()
 // store.dispatch()
 // store.subscribe(fun)
+
+// Store
+// Almacenamiento de nuestro estado
+const store = createStore(counter, composeWithDevTools(applyMiddleware()));
 
 export default store;
